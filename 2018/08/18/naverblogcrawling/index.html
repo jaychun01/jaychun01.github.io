@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-person-128.png">
+    <link rel="alternate" type="application/atom+xml" title="Code Gray" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        네이버api 이용한 블로그 크롤링(1)｜Code Gray
+        
+    </title>
+
+    <link rel="canonical" href="https://jaychun01.github.io/2018/08/18/naverblogcrawling/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('//o7bkkhiex.bkt.clouddn.com/lion-blur-bg.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Code Gray
+                </span>
+                 
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/Tags/">Tags</a>
+                        </li>
+							
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/archives/">archives</a>
+                        </li>
+							
+						
+                    
+
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>네이버api 이용한 블로그 크롤링(1)</h1>
+                    
+                    <span class="meta">
+                         by Jae Chun
+                        <span>
+                          date 2018-08-18
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#programming"
+                           title="programming">programming</a>
+                        
+                        <a class="tag" href="/tags/#python"
+                           title="python">python</a>
+                        
+                        <a class="tag" href="/tags/#crawling"
+                           title="crawling">crawling</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            네이버api 이용한 블로그 크롤링(1)
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <p>네이버 api 를 활용하여 블로그 크롤링을 해보았다.<br>먼저 <a href="https://developers.naver.com/main/" target="_blank" rel="noopener">네이버개발자센터</a>에서 api활용신청을 한 후, 개발가이드에 있는 코드를 복사해온다.  </p>
+<p>아래 코드에 클라이언트 아이디, 시크릿, 검색단어를 작성한 후 스크립트를 실행하면 블로그 10개의 결과를 볼 수 있다.<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> urllib.request</span><br><span class="line">client_id = <span class="string">"YOUR_CLIENT_ID"</span></span><br><span class="line">client_secret = <span class="string">"YOUR_CLIENT_SECRET"</span></span><br><span class="line">encText = urllib.parse.quote(<span class="string">"검색할 단어"</span>)</span><br><span class="line">url = <span class="string">"https://openapi.naver.com/v1/search/blog?query="</span> + encText <span class="comment"># json 결과</span></span><br><span class="line"><span class="comment"># url = "https://openapi.naver.com/v1/search/blog.xml?query=" + encText # xml 결과</span></span><br><span class="line">request = urllib.request.Request(url)</span><br><span class="line">request.add_header(<span class="string">"X-Naver-Client-Id"</span>,client_id)</span><br><span class="line">request.add_header(<span class="string">"X-Naver-Client-Secret"</span>,client_secret)</span><br><span class="line">response = urllib.request.urlopen(request)</span><br><span class="line">rescode = response.getcode()</span><br><span class="line"><span class="keyword">if</span>(rescode==<span class="number">200</span>):</span><br><span class="line">    response_body = response.read()</span><br><span class="line">    print(response_body.decode(<span class="string">'utf-8'</span>))</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    print(<span class="string">"Error Code:"</span> + rescode)</span><br></pre></td></tr></table></figure></p>
+<p>여기서 몇 가지 조건을 입력할 수 있다.  </p>
+<table>
+<thead>
+<tr>
+<th>요청 변수</th>
+<th>타입</th>
+<th>필수 여부</th>
+<th>기본값</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>query</td>
+<td>string</td>
+<td>Y</td>
+<td>-</td>
+<td>검색을 원하는 문자열로서 UTF-8로 인코딩한다.</td>
+</tr>
+<tr>
+<td>display</td>
+<td>integer</td>
+<td>N</td>
+<td>10(기본값),100(최대)</td>
+<td>검색 결과 출력 건수 지정</td>
+</tr>
+<tr>
+<td>start</td>
+<td>integer</td>
+<td>N</td>
+<td>1(기본값), 1000(최대)</td>
+<td>검색 시작 위치로 최대 1000까지 가능</td>
+</tr>
+<tr>
+<td>sort</td>
+<td>string</td>
+<td>N</td>
+<td>sim(기본값), date</td>
+<td>정렬 옵션: sim (유사도순), date (날짜순)</td>
+</tr>
+</tbody>
+</table>
+<p>위의 조건은 아래와 만들어진 url에 조건을 붙여서 사용한다.<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">url = <span class="string">"https://openapi.naver.com/v1/search/blog?query="</span> + encText <span class="comment"># json 결과</span></span><br><span class="line">condition=url+<span class="string">'&amp;display=100&amp;start=10'</span></span><br><span class="line">request = urllib.request.Request(condition)</span><br></pre></td></tr></table></figure></p>
+<p>따라서 100개씩 검색하면서, start=1000이 되는 조건의 url을 만들고 싶을 때는 아래와 비슷하게 100씩 증가하는 반복문을 활용하면 될 것이라 생각한다.<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">1000</span>,<span class="number">100</span>):</span><br></pre></td></tr></table></figure></p>
+<p>이제 받아온 json값에서 필요한 부분만 저장하는 것이 필요하다.<br>아래 json값에서 내가 필요한 것은 제목과 내용으로 모두 아이템에 저장되어 있었다.<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;  </span><br><span class="line">&quot;lastBuildDate&quot;: &quot;Wed, 08 Aug 2018 19:22:27 +0900&quot;,  </span><br><span class="line">&quot;total&quot;: 426549,  </span><br><span class="line">&quot;start&quot;: 1,  </span><br><span class="line">&quot;display&quot;: 1,  </span><br><span class="line">&quot;items&quot;: [  </span><br><span class="line">&#123;  </span><br><span class="line">&quot;title&quot;: &quot;한국 최초의 &lt;b&gt;NBA&lt;/b&gt; 데이터 애널리스트 김재엽 인터뷰&quot;,  </span><br><span class="line">&quot;link&quot;: &quot;https://ppss.kr/archives/170156&quot;,  </span><br><span class="line">&quot;description&quot;: &quot;김재엽: &lt;b&gt;NBA&lt;/b&gt; LA레이커스 데이터 애널리스트, &lt;b&gt;NBA&lt;/b&gt; 최초의 한국인</span><br><span class="line">애널리스트 사장 매직존슨에게 1:1로 보고한 한국인 애널리스트 리(이승환 ㅍㅍㅅㅅ 대표): 르브론</span><br><span class="line">제임스가 일하던 레이커스로 왔는데 어떠세요? 김... &quot;,  </span><br><span class="line">&quot;bloggername&quot;: &quot;ㅍㅍㅅㅅ&quot;,  </span><br><span class="line">&quot;bloggerlink&quot;: &quot;https://ppss.kr/&quot;,  </span><br><span class="line">&quot;postdate&quot;: &quot;20180718&quot;  </span><br><span class="line">&#125;  </span><br><span class="line">]  </span><br><span class="line">&#125;  </span><br><span class="line">&#123;:.message&#125;</span><br></pre></td></tr></table></figure></p>
+<p><br><br>따라서 이를 json형식의 딕셔너리로 저장하기 위해서는 json 모듈을 호출해야한다.<br>그리고 크롤링 데이터를 호출하는 if문에서 jason.load()를 통해 변수에 저장한다.  </p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">if</span>(rescode==<span class="number">200</span>):</span><br><span class="line">    response_body = response.read()</span><br><span class="line">    data = json.loads(response_body)</span><br><span class="line">    print(response_body.decode(<span class="string">'utf-8'</span>))</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    print(<span class="string">"Error Code:"</span> + rescode)</span><br></pre></td></tr></table></figure>
+<p>이렇게 불러온 데이터를 데이터프레임으로 변환시켜 엑셀에 저장하고 마무리한다.<br>title과 desc를 저장할 리스트를 만든 후 .append를 통해서 데이터를 저장한다.<br>그리고 pandas 모듈을 호출하여 데이터프레임으로 변환한다.<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">length=len(data[<span class="string">'items'</span>])</span><br><span class="line">title=[]</span><br><span class="line">desc=[]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(length):</span><br><span class="line">    title.append(data[<span class="string">'items'</span>][i][<span class="string">"title"</span>])</span><br><span class="line">    desc.append(data[<span class="string">'items'</span>][i][<span class="string">"description"</span>])</span><br><span class="line">    </span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line">NBA=pd.DataFrame(&#123;<span class="string">"title"</span>:title, <span class="string">"desc"</span>:desc&#125;)</span><br><span class="line">NBA.to_csv(<span class="string">'NBA.csv'</span>,encoding=<span class="string">'utf-8-sig'</span>, index=<span class="keyword">False</span>)</span><br></pre></td></tr></table></figure></p>
+<p>마지막으로 to_csv함수로 엑셀형태로 저장할 수 있다.<br>인코딩은 utf-8 로 실행하니 한글이 깨져서 -sig를 붙이면 된다는 글을 보고 시도해보니 정상적으로 저장되었다.  </p>
+<p><img src="https://user-images.githubusercontent.com/36698150/43833673-876cdc68-9b46-11e8-9e04-bc5d8f73a3ca.PNG" alt="default"></p>
+<p>아쉬운 점은 전체내용을 크롤링 하는 법은 지원하지 않는다는 점이다.  </p>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2018/08/18/naverblogcrawling2/" data-toggle="tooltip" data-placement="top"
+                           title="네이버api 블로그 크롤링(2)">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2018/08/18/binu/" data-toggle="tooltip" data-placement="top"
+                           title="binu">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+
+                <!--加入新的评论系统-->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/tags/">FEATURED TAGS</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#programming"
+                           title="programming">programming</a>
+                        
+                        <a class="tag" href="/tags/#python"
+                           title="python">python</a>
+                        
+                        <a class="tag" href="/tags/#crawling"
+                           title="crawling">crawling</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "world0584";
+    var disqus_identifier = "https://jaychun01.github.io/2018/08/18/naverblogcrawling/";
+    var disqus_url = "https://jaychun01.github.io/2018/08/18/naverblogcrawling/";
+
+    (function () {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/jaekwanchun.01">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.instargram.com/jay_jaekwan_chun">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/jaychun01">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Code Gray 2018
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Theme by <a href="https://haojen.github.io/">Haojen Ma</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://jaychun01.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="">
+</body>
+
+</html>

@@ -18,11 +18,11 @@
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
     <title>
         
-        kanu｜Code Gray
+        네이버 api 블로그 크롤링(3) - 데이터 마이닝｜Code Gray
         
     </title>
 
-    <link rel="canonical" href="https://jaychun01.github.io/2018/08/18/kanu/">
+    <link rel="canonical" href="https://jaychun01.github.io/2018/08/19/datamining/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -80,7 +80,7 @@
                         
 							
                         <li>
-                            <a href="/archives/">archives</a>
+                            <a href="/Tags/">Tags</a>
                         </li>
 							
 						
@@ -88,7 +88,7 @@
                         
 							
                         <li>
-                            <a href="/Tags/">Tags</a>
+                            <a href="/archives/">archives</a>
                         </li>
 							
 						
@@ -153,21 +153,24 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
                 <div class="post-heading">
-                    <h1>kanu</h1>
+                    <h1>네이버 api 블로그 크롤링(3) - 데이터 마이닝</h1>
                     
                     <span class="meta">
                          by Jae Chun
                         <span>
-                          date 2018-08-18
+                          date 2018-08-19
                          </span>
                     </span>
                     <div class="tags text-center">
                         
-                        <a class="tag" href="/tags/#kanu"
-                           title="kanu">kanu</a>
+                        <a class="tag" href="/tags/#programming"
+                           title="programming">programming</a>
                         
-                        <a class="tag" href="/tags/#binu"
-                           title="binu">binu</a>
+                        <a class="tag" href="/tags/#python"
+                           title="python">python</a>
+                        
+                        <a class="tag" href="/tags/#data mining"
+                           title="data mining">data mining</a>
                         
                     </div>
                 </div>
@@ -176,7 +179,7 @@
     </div>
     <div class="post-title-haojen">
         <span>
-            kanu
+            네이버 api 블로그 크롤링(3) - 데이터 마이닝
         </span>
     </div>
 </header>
@@ -187,18 +190,26 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <p>카누, 비누</p>
+                <p><br><br>이번엔 크롤링으로 추출한 블로그 내용에서 명사만 추출하는 데이터 마이닝을 실시한다.<br>필요한 모듈은 konlpy 모듈이다. 설치가 조금은 복잡할 수도 있으니 <a href="http://konlpy.org/en/latest/" target="_blank" rel="noopener">공식문서</a>에서 확인하면 좋을 것 같다.  </p>
+<hr>
+<p><br><br>먼저 모듈을 불러온다. numpy는 필요없는 것 같지만 습관적으로 pandas와 같이 import 했다.<br>konlpy.tag를 보면 여러개의 태크 패키지가 있는데 그 중에서 가장 추출이 잘 되고 성능이 좋아보이는 Okt 클래스를 호출했다. Okt는 Twitter클래스에서 바뀐 것이기 때문에 Twitter 클래스를 호출하면 Okt를 호출하라고 메세지가 나온다.<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">from</span> konlpy.tag <span class="keyword">import</span> Okt</span><br><span class="line"></span><br><span class="line">okt=Okt()</span><br></pre></td></tr></table></figure></p>
+<p><br><br><br><br>먼저 명사를 추출하는 ExtractNouns의 생성자를 살펴보면 파일 이름과 타입을 입력받도록 되어 있다.<br>이는 파일 타입에 따라서 데이터를 읽어오는 방식을 달리하기 위함이다.<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ExtractNouns</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.fname=input(<span class="string">"파일 이름을 입력하세요:"</span>)</span><br><span class="line">        self.type=input(<span class="string">"파일 타입을 입력하세요(csv/txt): "</span>)</span><br><span class="line">        self.extraction(self.fname, self.type)</span><br></pre></td></tr></table></figure></p>
+<p><br><br><br><br>extration함수에는 위에 설명한 바와 같이 txt 파일인 경우 입출력기를 열고 readlines() 통해 읽어온다.<br>csv파일의 경우 pandas를 통해 데이터 프레임으로 받아온 후 content 부분만 따로 저장한다.<br>이전 블로그 크롤링에서 데이터를 title, date, content로 저장했기 때문에 content를 저장하도록 했다.<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">extraction</span><span class="params">(self, filename, type)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> type==<span class="string">"txt"</span>:</span><br><span class="line">        txt=filename+<span class="string">".txt"</span></span><br><span class="line">        fin=open(txt, <span class="string">"rt"</span>, encoding=<span class="string">"utf-8-sig"</span>)</span><br><span class="line">        txtList=fin.readlines()</span><br><span class="line">        scanlist=txtList</span><br><span class="line">        fin.close()</span><br><span class="line">    <span class="keyword">elif</span> type==<span class="string">"csv"</span>:</span><br><span class="line">        csv=filename+<span class="string">".csv"</span></span><br><span class="line">        dt=pd.read_csv(csv, encoding=<span class="string">"utf-8-sig"</span>)</span><br><span class="line">        scanlist=df[<span class="string">"content"</span>]</span><br></pre></td></tr></table></figure></p>
+<p><br><br>이렇게 저장된 내용을 순회하며 okt.nouns(데이터)를 하면 명사를 모두 추출한다. 이렇게 추출된 내용은 다시 리스트형태로 저장되기 때문에 다시 순회하며 딕셔너리에 같은 key가 없으면 추가하고, 있으면 개수만 올리도록 한다.<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">dict_data=&#123;&#125;</span><br><span class="line"><span class="keyword">for</span> data <span class="keyword">in</span> scanlist:</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        temp = okt.nouns(data)</span><br><span class="line">        <span class="keyword">for</span> n <span class="keyword">in</span> temp:</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> (n <span class="keyword">in</span> dict_data):</span><br><span class="line">                dict_data[n] = <span class="number">0</span></span><br><span class="line">            dict_data[n] += <span class="number">1</span></span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="keyword">continue</span></span><br></pre></td></tr></table></figure></p>
+<p><br><br>저장된 딕셔너리를 정렬해주고 처음에 받았던 이름과 Nouns를 결합해 텍스트 파일로 저장한다.<br><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">sortedResult=sorted(dict_data.items(), key=<span class="keyword">lambda</span> x:x[<span class="number">1</span>], reverse=<span class="keyword">True</span>)</span><br><span class="line">fout=filename+<span class="string">"Nouns.txt"</span></span><br><span class="line">f=open(fout, <span class="string">"wt"</span>, encoding=<span class="string">"utf-8"</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> reversed(range(len(sortedResult))):</span><br><span class="line">    f.write(str(sortedResult[i])+<span class="string">"\n"</span>)</span><br><span class="line">f.close()</span><br></pre></td></tr></table></figure></p>
+<p><br><br>어렵지 않게 명사추출을 할 수 있었다. 실행하면 작업 폴더에 텍스트 파일이 생기는 것을 확인할 수 있다.<br>파일을 확인해보면 역시 우리말 데이터 마이닝을 하다보면 완벽하지 않다는 것을 알 수 있다.<br>또 문제는 norm함수는 그럭저럭 돌아갔지만 pos()를 돌리면 자꾸만 커널이 죽는다..<br>노트북 성능의 문제인 것 같은데 어떻게 할 수 있는 방법이 없을까?</p>
+<p>앞으로 해야할 것은 크롤러부터 명사 추출까지 하나의 어플리케이션으로 구축하는 것이다.<br>UI와 데이터베이스까지 구축한다면 더할 나위 없이 좋을 것이다.</p>
 
                 <hr>
                 
 
                 <ul class="pager">
                     
-                    <li class="previous">
-                        <a href="/2018/08/18/binu/" data-toggle="tooltip" data-placement="top"
-                           title="binu">&larr; Previous Post</a>
-                    </li>
                     
+                    <li class="next">
+                        <a href="/2018/08/18/naverblogcrawling2/" data-toggle="tooltip" data-placement="top"
+                           title="네이버api 블로그 크롤링(2)">Next Post &rarr;</a>
+                    </li>
                     
                 </ul>
 
@@ -244,11 +255,14 @@
                     </h5>
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#kanu"
-                           title="kanu">kanu</a>
+                        <a class="tag" href="/tags/#programming"
+                           title="programming">programming</a>
                         
-                        <a class="tag" href="/tags/#binu"
-                           title="binu">binu</a>
+                        <a class="tag" href="/tags/#python"
+                           title="python">python</a>
+                        
+                        <a class="tag" href="/tags/#data mining"
+                           title="data mining">data mining</a>
                         
                     </div>
                 </section>
@@ -268,8 +282,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "world0584";
-    var disqus_identifier = "https://jaychun01.github.io/2018/08/18/kanu/";
-    var disqus_url = "https://jaychun01.github.io/2018/08/18/kanu/";
+    var disqus_identifier = "https://jaychun01.github.io/2018/08/19/datamining/";
+    var disqus_url = "https://jaychun01.github.io/2018/08/19/datamining/";
 
     (function () {
         var dsq = document.createElement('script');

@@ -18,11 +18,11 @@
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
     <title>
         
-        Tags｜Code Gray
+        파이썬 cheatsheet - 지속적 업로드 예정｜Code Gray
         
     </title>
 
-    <link rel="canonical" href="https://jaychun01.github.io/Tags/">
+    <link rel="canonical" href="https://jaychun01.github.io/2018/08/19/cheatsheet/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -43,7 +43,7 @@
 <!-- hack iOS CSS :active style -->
 <body ontouchstart="" class="animated fadeIn">
 <!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "false" data-istags="false
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
 " data-ishome = "false" >
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -131,220 +131,170 @@
 </script>
 
 <!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="https://imageshack.com/a/img922/7296/6jpy7n.jpg">
+
+
 <style>
-    .intro-header .site-heading {
-        margin: 50px;
-    }
     
     header.intro-header {
         background-image: url('https://imageshack.com/a/img922/7296/6jpy7n.jpg')
     }
+
     
 </style>
 
-<!-- Page Header -->
 <header class="intro-header">
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
-                <div class="site-heading text-center">
-                    <h1>Tags</h1>
-                    <span class="subheading"></span>
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>파이썬 cheatsheet - 지속적 업로드 예정</h1>
+                    
+                    <span class="meta">
+                         by Jae Chun
+                        <span>
+                          date 2018-08-19
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#Programming"
+                           title="Programming">Programming</a>
+                        
+                        <a class="tag" href="/tags/#python"
+                           title="python">python</a>
+                        
+                        <a class="tag" href="/tags/#cheatsheet"
+                           title="cheatsheet">cheatsheet</a>
+                        
+                    </div>
                 </div>
             </div>
         </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            파이썬 cheatsheet - 지속적 업로드 예정
+        </span>
     </div>
 </header>
 
-<!-- Main Content -->
-<div class="container">
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            <!-- 标签云 -->
-            <div id='tag_cloud' class="tags">
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <p><br></p>
+<p>파이썬을 본격적으로 사용하기 시작하면서 파이썬에서 자주 쓰이는 문법에 대한 cheatsheet의 필요성을 느꼈다.  </p>
+<p>매번 사용하는 코드인데도 불구하고 막상 필요할 때는 생각이 안나는 것 때문에 검색하기에도 질렸다.  </p>
+<p>여기는 지속적으로 업데이트가 되는 나만의 python cheatsheet이 될 것이다. </p>
+<hr>
+<p><br></p>
+<p>##- string 연산</p>
+<figure class="highlight plain"><figcaption><span>s.rstirp(), s.lstrip()``` : 공백 제거</span></figcaption><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">```s.replace(&quot;from&quot;,&quot;to&quot;)``` : 문자열 변경</span><br><span class="line"></span><br><span class="line">```s.split(char)``` : char기준으로 문자열 나누기, 리스트로 반환</span><br><span class="line"></span><br><span class="line">```&quot;Today is %s&quot; %&quot;sunday&quot;``` : 문자열 포맷팅</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">##- List 연산</span><br><span class="line"></span><br><span class="line">```lst.append(val)``` : 마지막에 아이템 추가</span><br><span class="line"></span><br><span class="line">```lst.extend(seq)``` : 연속데이터를 마지막에 추가</span><br><span class="line"></span><br><span class="line">```lst.insert(idx, val)```: 인덱스 위치에 아이템 추가</span><br><span class="line"></span><br><span class="line">```lst.remove(val)``` : val에 해당하는 가장 첫 번째 데이터 삭제</span><br><span class="line"></span><br><span class="line">```lst.pop([idx])-&gt;value```: 해당 인덱스를 pop 하여 리턴, 인덱스의 디폴트는 가장 마지막</span><br><span class="line"></span><br><span class="line">```lst.sort(), lst.reverse()```: 정렬과 뒤집기 연산</span><br><span class="line"></span><br><span class="line">&lt;br/&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">##- Dictionary 연산</span><br><span class="line"></span><br><span class="line">```d[key] =value``` : 키 추가, 이미 같은 키가 있다면 값 변경</span><br><span class="line"></span><br><span class="line">```del d[key]``` : 해당 키 삭제</span><br><span class="line"></span><br><span class="line">```d[key], d.get(key)``` : 값을 리턴, get함수를 사용하면 데이터가 없어도 오류가 발생하지 않음</span><br><span class="line"></span><br><span class="line">```d.keys(), d.values(), d.items()``` : 키, 값, 키와 값 리턴</span><br><span class="line"></span><br><span class="line">```d.pop(key[,default])``` : 값 리턴</span><br><span class="line"></span><br><span class="line">```d.popitem()``` : (키, 값) 리턴</span><br><span class="line"></span><br><span class="line">&lt;br/&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">##- File I/O</span><br><span class="line"></span><br><span class="line">```f=open(&quot;file.txt&quot;, &quot;w&quot;, encoding=&quot;utf-8-sig&quot;)```: open(name of file, opening mode, encoding(보통 utf-8, cp949))</span><br><span class="line"></span><br><span class="line">opending mode: w=쓰기, r=읽기, a=append, t=text, b=binary</span><br><span class="line"></span><br><span class="line">```f.write(&quot;string&quot;) or f.writelines()``` : 쓰기</span><br><span class="line"></span><br><span class="line">```f.read([n]), f.readline([n]) or f.readlines()``` : 읽기 (문자, 한줄, 여러 줄)</span><br><span class="line"></span><br><span class="line">```f.flush(), f.tell()</span><br></pre></td></tr></table></figure>
+
+                <hr>
                 
-                <a href="#Programming" title="Programming" rel="1">Programming</a>
+
+                <ul class="pager">
+                    
+                    
+                    <li class="next">
+                        <a href="/2018/08/19/datamining/" data-toggle="tooltip" data-placement="top"
+                           title="네이버 api 블로그 크롤링(3) - 데이터 마이닝">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
                 
-                <a href="#python" title="python" rel="4">python</a>
+
                 
-                <a href="#cheatsheet" title="cheatsheet" rel="1">cheatsheet</a>
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
                 
-                <a href="#programming" title="programming" rel="3">programming</a>
+
+
+                <!--加入新的评论系统-->
                 
-                <a href="#crawling" title="crawling" rel="2">crawling</a>
+
                 
-                <a href="#data mining" title="data mining" rel="1">data mining</a>
-                
+
             </div>
 
-            <!-- 标签列表 -->
-            
-            <div class="one-tag-list">
-                <span class="fa fa-tag listing-seperator" id="Programming">
-                    <span class="tag-text">Programming</span>
-                </span>
-                
-                <div class="post-preview">
-                    <a href="/2018/08/19/cheatsheet/">
-                        <h2 class="post-title">
-                            파이썬 cheatsheet - 지속적 업로드 예정
-                        </h2>
-                        
-                    </a>
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    
                 </div>
-                <hr>
-                
             </div>
-            
-            <div class="one-tag-list">
-                <span class="fa fa-tag listing-seperator" id="python">
-                    <span class="tag-text">python</span>
-                </span>
-                
-                <div class="post-preview">
-                    <a href="/2018/08/19/cheatsheet/">
-                        <h2 class="post-title">
-                            파이썬 cheatsheet - 지속적 업로드 예정
-                        </h2>
-                        
-                    </a>
-                </div>
-                <hr>
-                
-                <div class="post-preview">
-                    <a href="/2018/08/18/naverblogcrawling/">
-                        <h2 class="post-title">
-                            네이버api 블로그 크롤링(1)
-                        </h2>
-                        
-                    </a>
-                </div>
-                <hr>
-                
-                <div class="post-preview">
-                    <a href="/2018/08/19/datamining/">
-                        <h2 class="post-title">
-                            네이버 api 블로그 크롤링(3) - 데이터 마이닝
-                        </h2>
-                        
-                    </a>
-                </div>
-                <hr>
-                
-                <div class="post-preview">
-                    <a href="/2018/08/18/naverblogcrawling2/">
-                        <h2 class="post-title">
-                            네이버api 블로그 크롤링(2)
-                        </h2>
-                        
-                    </a>
-                </div>
-                <hr>
-                
-            </div>
-            
-            <div class="one-tag-list">
-                <span class="fa fa-tag listing-seperator" id="cheatsheet">
-                    <span class="tag-text">cheatsheet</span>
-                </span>
-                
-                <div class="post-preview">
-                    <a href="/2018/08/19/cheatsheet/">
-                        <h2 class="post-title">
-                            파이썬 cheatsheet - 지속적 업로드 예정
-                        </h2>
-                        
-                    </a>
-                </div>
-                <hr>
-                
-            </div>
-            
-            <div class="one-tag-list">
-                <span class="fa fa-tag listing-seperator" id="programming">
-                    <span class="tag-text">programming</span>
-                </span>
-                
-                <div class="post-preview">
-                    <a href="/2018/08/18/naverblogcrawling/">
-                        <h2 class="post-title">
-                            네이버api 블로그 크롤링(1)
-                        </h2>
-                        
-                    </a>
-                </div>
-                <hr>
-                
-                <div class="post-preview">
-                    <a href="/2018/08/19/datamining/">
-                        <h2 class="post-title">
-                            네이버 api 블로그 크롤링(3) - 데이터 마이닝
-                        </h2>
-                        
-                    </a>
-                </div>
-                <hr>
-                
-                <div class="post-preview">
-                    <a href="/2018/08/18/naverblogcrawling2/">
-                        <h2 class="post-title">
-                            네이버api 블로그 크롤링(2)
-                        </h2>
-                        
-                    </a>
-                </div>
-                <hr>
-                
-            </div>
-            
-            <div class="one-tag-list">
-                <span class="fa fa-tag listing-seperator" id="crawling">
-                    <span class="tag-text">crawling</span>
-                </span>
-                
-                <div class="post-preview">
-                    <a href="/2018/08/18/naverblogcrawling/">
-                        <h2 class="post-title">
-                            네이버api 블로그 크롤링(1)
-                        </h2>
-                        
-                    </a>
-                </div>
-                <hr>
-                
-                <div class="post-preview">
-                    <a href="/2018/08/18/naverblogcrawling2/">
-                        <h2 class="post-title">
-                            네이버api 블로그 크롤링(2)
-                        </h2>
-                        
-                    </a>
-                </div>
-                <hr>
-                
-            </div>
-            
-            <div class="one-tag-list">
-                <span class="fa fa-tag listing-seperator" id="data mining">
-                    <span class="tag-text">data mining</span>
-                </span>
-                
-                <div class="post-preview">
-                    <a href="/2018/08/19/datamining/">
-                        <h2 class="post-title">
-                            네이버 api 블로그 크롤링(3) - 데이터 마이닝
-                        </h2>
-                        
-                    </a>
-                </div>
-                <hr>
-                
-            </div>
-            
-
         </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/tags/">FEATURED TAGS</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#Programming"
+                           title="Programming">Programming</a>
+                        
+                        <a class="tag" href="/tags/#python"
+                           title="python">python</a>
+                        
+                        <a class="tag" href="/tags/#cheatsheet"
+                           title="cheatsheet">cheatsheet</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+
     </div>
-</div>
+</article>
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "world0584";
+    var disqus_identifier = "https://jaychun01.github.io/2018/08/19/cheatsheet/";
+    var disqus_url = "https://jaychun01.github.io/2018/08/19/cheatsheet/";
+
+    (function () {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
 
 <!-- Footer -->
 <!-- Footer -->

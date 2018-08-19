@@ -196,8 +196,42 @@
 <p>여기는 지속적으로 업데이트가 되는 나만의 python cheatsheet이 될 것이다. </p>
 <hr>
 <p><br></p>
-<p>##- string 연산</p>
-<figure class="highlight plain"><figcaption><span>s.rstirp(), s.lstrip()``` : 공백 제거</span></figcaption><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">```s.replace(&quot;from&quot;,&quot;to&quot;)``` : 문자열 변경</span><br><span class="line"></span><br><span class="line">```s.split(char)``` : char기준으로 문자열 나누기, 리스트로 반환</span><br><span class="line"></span><br><span class="line">```&quot;Today is %s&quot; %&quot;sunday&quot;``` : 문자열 포맷팅</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">##- List 연산</span><br><span class="line"></span><br><span class="line">```lst.append(val)``` : 마지막에 아이템 추가</span><br><span class="line"></span><br><span class="line">```lst.extend(seq)``` : 연속데이터를 마지막에 추가</span><br><span class="line"></span><br><span class="line">```lst.insert(idx, val)```: 인덱스 위치에 아이템 추가</span><br><span class="line"></span><br><span class="line">```lst.remove(val)``` : val에 해당하는 가장 첫 번째 데이터 삭제</span><br><span class="line"></span><br><span class="line">```lst.pop([idx])-&gt;value```: 해당 인덱스를 pop 하여 리턴, 인덱스의 디폴트는 가장 마지막</span><br><span class="line"></span><br><span class="line">```lst.sort(), lst.reverse()```: 정렬과 뒤집기 연산</span><br><span class="line"></span><br><span class="line">&lt;br/&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">##- Dictionary 연산</span><br><span class="line"></span><br><span class="line">```d[key] =value``` : 키 추가, 이미 같은 키가 있다면 값 변경</span><br><span class="line"></span><br><span class="line">```del d[key]``` : 해당 키 삭제</span><br><span class="line"></span><br><span class="line">```d[key], d.get(key)``` : 값을 리턴, get함수를 사용하면 데이터가 없어도 오류가 발생하지 않음</span><br><span class="line"></span><br><span class="line">```d.keys(), d.values(), d.items()``` : 키, 값, 키와 값 리턴</span><br><span class="line"></span><br><span class="line">```d.pop(key[,default])``` : 값 리턴</span><br><span class="line"></span><br><span class="line">```d.popitem()``` : (키, 값) 리턴</span><br><span class="line"></span><br><span class="line">&lt;br/&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">##- File I/O</span><br><span class="line"></span><br><span class="line">```f=open(&quot;file.txt&quot;, &quot;w&quot;, encoding=&quot;utf-8-sig&quot;)```: open(name of file, opening mode, encoding(보통 utf-8, cp949))</span><br><span class="line"></span><br><span class="line">opending mode: w=쓰기, r=읽기, a=append, t=text, b=binary</span><br><span class="line"></span><br><span class="line">```f.write(&quot;string&quot;) or f.writelines()``` : 쓰기</span><br><span class="line"></span><br><span class="line">```f.read([n]), f.readline([n]) or f.readlines()``` : 읽기 (문자, 한줄, 여러 줄)</span><br><span class="line"></span><br><span class="line">```f.flush(), f.tell()</span><br></pre></td></tr></table></figure>
+<ul>
+<li>string</li>
+</ul>
+<p><code>s.strip(), s.rstirp(), s.lstrip()</code> : 공백 제거</p>
+<p><code>s.replace(&quot;from&quot;,&quot;to&quot;)</code> : 문자열 변경</p>
+<p><code>s.split(char)</code> : char기준으로 문자열 나누기, 리스트로 반환</p>
+<p><code>&quot;Today is %s&quot; %&quot;sunday&quot;</code> : 문자열 포맷팅</p>
+<p><br></p>
+<ul>
+<li>List</li>
+</ul>
+<p><code>lst.append(val)</code> : 마지막에 아이템 추가</p>
+<p><code>lst.extend(seq)</code> : 연속데이터를 마지막에 추가</p>
+<p><code>lst.insert(idx, val)</code>: 인덱스 위치에 아이템 추가</p>
+<p><code>lst.remove(val)</code> : val에 해당하는 가장 첫 번째 데이터 삭제</p>
+<p><code>lst.pop([idx])-&gt;value</code>: 해당 인덱스를 pop 하여 리턴, 인덱스의 디폴트는 가장 마지막</p>
+<p><code>lst.sort(), lst.reverse()</code>: 정렬과 뒤집기 연산</p>
+<p><br></p>
+<ul>
+<li>Dictionary</li>
+</ul>
+<p><code>d[key] =value</code> : 키 추가, 이미 같은 키가 있다면 값 변경</p>
+<p><code>del d[key]</code> : 해당 키 삭제</p>
+<p><code>d[key], d.get(key)</code> : 값을 리턴, get함수를 사용하면 데이터가 없어도 오류가 발생하지 않음</p>
+<p><code>d.keys(), d.values(), d.items()</code> : 키, 값, 키와 값 리턴</p>
+<p><code>d.pop(key[,default])</code> : 값 리턴</p>
+<p><code>d.popitem()</code> : (키, 값) 리턴</p>
+<p><br></p>
+<ul>
+<li>File I/O</li>
+</ul>
+<p><code>f=open(&quot;file.txt&quot;, &quot;w&quot;, encoding=&quot;utf-8-sig&quot;)</code>: open(name of file, opening mode, encoding)</p>
+<p>opending mode: w=쓰기, r=읽기, a=append, t=text, b=binary</p>
+<p><code>f.write(&quot;string&quot;) or f.writelines()</code> : 쓰기</p>
+<p><code>f.read([n]), f.readline([n]) or f.readlines()</code> : 읽기 (문자, 한줄, 여러 줄)</p>
+<p><code>f.flush(), f.tell()</code></p>
 
                 <hr>
                 

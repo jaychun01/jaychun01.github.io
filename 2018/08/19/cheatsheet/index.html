@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
+    <meta name="description" content="Gray is an intermediate color between black and white.">
     <meta name="keyword" content="">
     <meta name="theme-color" content="#600090">
     <meta name="msapplication-navbutton-color" content="#600090">
@@ -80,20 +80,22 @@
                         
 							
                         <li>
-                            <a href="/archives/">archives</a>
+                            <a href="/Tags/">Tags</a>
                         </li>
 							
 						
                     
                         
 							
-                        <li>
-                            <a href="/Tags/">Tags</a>
-                        </li>
+								
 							
 						
                     
 
+					
+						<li>
+							<a href="/about">About</a>
+						</li>
 					
                 </ul>
             </div>
@@ -136,13 +138,13 @@
 
 
 <img class="wechat-title-img"
-     src="https://imageshack.com/a/img922/7296/6jpy7n.jpg">
+     src="https://imageshack.com/a/img923/4575/rrDyZa.jpg">
 
 
 <style>
     
     header.intro-header {
-        background-image: url('https://imageshack.com/a/img922/7296/6jpy7n.jpg')
+        background-image: url('https://imageshack.com/a/img923/4575/rrDyZa.jpg')
     }
 
     
@@ -163,8 +165,8 @@
                     </span>
                     <div class="tags text-center">
                         
-                        <a class="tag" href="/tags/#Programming"
-                           title="Programming">Programming</a>
+                        <a class="tag" href="/tags/#programming"
+                           title="programming">programming</a>
                         
                         <a class="tag" href="/tags/#python"
                            title="python">python</a>
@@ -195,46 +197,42 @@
 <p>매번 사용하는 코드인데도 불구하고 막상 필요할 때는 생각이 안나는 것 때문에 검색하기에도 질렸다.  </p>
 <p>여기는 지속적으로 업데이트가 되는 나만의 python cheatsheet이 될 것이다. </p>
 <hr>
-<p><br></p>
 <ul>
-<li>string</li>
+<li><a href="#string">string</a></li>
+<li><a href="#list">list</a></li>
+<li><a href="#dictionary">Dictionary</a></li>
+<li><a href="#file">File I/O</a></li>
+<li><a href="#pandas">Pandas</a></li>
 </ul>
+<p><br></p>
+<p>##string</p>
 <p><code>s.strip(), s.rstirp(), s.lstrip()</code> : 공백 제거</p>
 <p><code>s.replace(&quot;from&quot;,&quot;to&quot;)</code> : 문자열 변경</p>
 <p><code>s.split(char)</code> : char기준으로 문자열 나누기, 리스트로 반환</p>
 <p><code>&quot;Today is %s&quot; %&quot;sunday&quot;</code> : 문자열 포맷팅</p>
 <p><br></p>
-<ul>
-<li>List</li>
-</ul>
-<p><code>lst.append(val)</code> : 마지막에 아이템 추가</p>
+<h2 id="List"><a href="#List" class="headerlink" title="List"></a>List</h2><p><code>lst.append(val)</code> : 마지막에 아이템 추가</p>
 <p><code>lst.extend(seq)</code> : 연속데이터를 마지막에 추가</p>
 <p><code>lst.insert(idx, val)</code>: 인덱스 위치에 아이템 추가</p>
 <p><code>lst.remove(val)</code> : val에 해당하는 가장 첫 번째 데이터 삭제</p>
 <p><code>lst.pop([idx])-&gt;value</code>: 해당 인덱스를 pop 하여 리턴, 인덱스의 디폴트는 가장 마지막</p>
 <p><code>lst.sort(), lst.reverse()</code>: 정렬과 뒤집기 연산</p>
 <p><br></p>
-<ul>
-<li>Dictionary</li>
-</ul>
-<p><code>d[key] =value</code> : 키 추가, 이미 같은 키가 있다면 값 변경</p>
+<h1 id="Dictionary"><a href="#Dictionary" class="headerlink" title="Dictionary"></a>Dictionary</h1><p><code>d[key] =value</code> : 키 추가, 이미 같은 키가 있다면 값 변경</p>
 <p><code>del d[key]</code> : 해당 키 삭제</p>
 <p><code>d[key], d.get(key)</code> : 값을 리턴, get함수를 사용하면 데이터가 없어도 오류가 발생하지 않음</p>
 <p><code>d.keys(), d.values(), d.items()</code> : 키, 값, 키와 값 리턴</p>
 <p><code>d.pop(key[,default])</code> : 값 리턴</p>
 <p><code>d.popitem()</code> : (키, 값) 리턴</p>
 <p><br></p>
-<ul>
-<li>File I/O</li>
-</ul>
-<p><code>f=open(&quot;file.txt&quot;, &quot;w&quot;, encoding=&quot;utf-8-sig&quot;)</code>: open(name of file, opening mode, encoding)</p>
+<h2 id="File"><a href="#File" class="headerlink" title="File"></a>File</h2><p><code>f=open(&quot;file.txt&quot;, &quot;w&quot;, encoding=&quot;utf-8-sig&quot;)</code>: open(name of file, opening mode, encoding)</p>
 <p>opending mode: w=쓰기, r=읽기, a=append, t=text, b=binary</p>
 <p><code>f.write(&quot;string&quot;) or f.writelines()</code> : 쓰기</p>
 <p><code>f.read([n]), f.readline([n]) or f.readlines()</code> : 읽기 (문자, 한줄, 여러 줄)</p>
-<p><code>f.flush(), f.tell()</code><br><br></p>
-<ul>
-<li>Pandas (<a href="http://nittaku.tistory.com/" target="_blank" rel="noopener">참고</a>)<br><code>dt=pd.DataFrame(Series)</code> : 데이터프레임 선언<br><code>dt.shape(), dt.columns</code> : 데이터 프레임 행과 열 확인<br><code>dt.unique()</code> : 데이터가 범주형인지 확인<br><code>dt.dropna(how=&#39;any&#39;)</code> : 결측값 제거<br><br><br><code>pandas.merge(df1, df2, on=&quot;key&quot;)</code> : key 열을 기준으로 df1, df2에 공통적인 값이 있는 열으로만 데이터프레임 구성<br><code>pandas.merge(df1, df2, on=&quot;key&quot;, how=&quot;outer&quot;)</code> : 위와 같이 합쳐주지만 공통적인 값이 key열에 없어도 추가하여 nan값을 가짐<br><code>pandas.merge(df1, df2, on=&quot;key&quot;, how=&quot;left&quot;)</code>: df1의 key열을 기준으로 합침 <->how=”right”<br><code>pandas.merge(df1, df2, left_on=&quot;rkey&quot;, right_on=&quot;lkey&quot;)</code> : 기준되는 열의 이름이 다른 경우<br><br><br><code>pandas.merge(df1, df2, left_on=&quot;key&quot;, rigth_index=True)</code> : 왼쪽 dt의 열을 기준으로 오른쪽 dt의 인덱스값을 삽입하여 데이터프레임 구성(오른쪽 dt의 인덱스가 왼쪽 dt의 기준열의 도메인에 속해있어야 함)<br><code>pandas.merge(df1, df2, left_index=True, rigth_index=True)</code> : 공통된 인덱스를 기준으로 데이터프레임 구성(how=”” 옵션 가능)<br><br><br><code>pd.concat(s1,s2,s3)</code> : 시리즈를 단순 연결하여 하나의 시리즈로 연결 (s1,s2,s3는 시리즈형 데이터)<br><code>pd.concat([s1,s2,s3], axis=1, keys=[&quot;a&quot;,&quot;b&quot;,&quot;c&quot;])</code> : 시리즈를 열 방향으로 연결하여 데이터 프레임 구성, keys는 열이름에 해당(해당 인덱스가 없는 경우 nan값을 가짐)<br><code>pd.concat([dt1,dt2,dt3], axis=1, keys=[&quot;a&quot;,&quot;b&quot;,&quot;c&quot;])</code> : 데이터프레임의 연결도 시리즈와 동일<br><code>pd.concat([s1,s2,s3], ignore_index=True)</code> : 인덱스를 처음부터 새로 붙여서 데이터프레임 구성</-></li>
-</ul>
+<p><code>f.flush(), f.tell()</code></p>
+<p><br></p>
+<h2 id="Pandas"><a href="#Pandas" class="headerlink" title="Pandas"></a>Pandas</h2><p>(<a href="http://nittaku.tistory.com/" target="_blank" rel="noopener">참고 웹사이트</a>)</p>
+<p><code>dt=pd.DataFrame(Series)</code> : 데이터프레임 선언<br><code>dt.shape(), dt.columns</code> : 데이터 프레임 행과 열 확인<br><code>dt.unique()</code> : 데이터가 범주형인지 확인<br><code>dt.dropna(how=&#39;any&#39;)</code> : 결측값 제거<br><br><br><code>pandas.merge(df1, df2, on=&quot;key&quot;)</code> : key 열을 기준으로 df1, df2에 공통적인 값이 있는 열으로만 데이터프레임 구성<br><code>pandas.merge(df1, df2, on=&quot;key&quot;, how=&quot;outer&quot;)</code> : 위와 같이 합쳐주지만 공통적인 값이 key열에 없어도 추가하여 nan값을 가짐<br><code>pandas.merge(df1, df2, on=&quot;key&quot;, how=&quot;left&quot;)</code>: df1의 key열을 기준으로 합침 <->how=”right”<br><code>pandas.merge(df1, df2, left_on=&quot;rkey&quot;, right_on=&quot;lkey&quot;)</code> : 기준되는 열의 이름이 다른 경우<br><br><br><code>pandas.merge(df1, df2, left_on=&quot;key&quot;, rigth_index=True)</code> : 왼쪽 dt의 열을 기준으로 오른쪽 dt의 인덱스값을 삽입하여 데이터프레임 구성(오른쪽 dt의 인덱스가 왼쪽 dt의 기준열의 도메인에 속해있어야 함)<br><code>pandas.merge(df1, df2, left_index=True, rigth_index=True)</code> : 공통된 인덱스를 기준으로 데이터프레임 구성(how=”” 옵션 가능)<br><br><br><code>pd.concat(s1,s2,s3)</code> : 시리즈를 단순 연결하여 하나의 시리즈로 연결 (s1,s2,s3는 시리즈형 데이터)<br><code>pd.concat([s1,s2,s3], axis=1, keys=[&quot;a&quot;,&quot;b&quot;,&quot;c&quot;])</code> : 시리즈를 열 방향으로 연결하여 데이터 프레임 구성, keys는 열이름에 해당(해당 인덱스가 없는 경우 nan값을 가짐)<br><code>pd.concat([dt1,dt2,dt3], axis=1, keys=[&quot;a&quot;,&quot;b&quot;,&quot;c&quot;])</code> : 데이터프레임의 연결도 시리즈와 동일<br><code>pd.concat([s1,s2,s3], ignore_index=True)</code> : 인덱스를 처음부터 새로 붙여서 데이터프레임 구성</-></p>
 
                 <hr>
                 
@@ -269,7 +267,7 @@
 
             <div class="hidden-xs col-sm-3 toc-col">
                 <div class="toc-wrap">
-                    
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#List"><span class="toc-text">List</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Dictionary"><span class="toc-text">Dictionary</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#File"><span class="toc-text">File</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pandas"><span class="toc-text">Pandas</span></a></li></ol>
                 </div>
             </div>
         </div>
@@ -291,8 +289,8 @@
                     </h5>
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#Programming"
-                           title="Programming">Programming</a>
+                        <a class="tag" href="/tags/#programming"
+                           title="programming">programming</a>
                         
                         <a class="tag" href="/tags/#python"
                            title="python">python</a>
@@ -378,6 +376,15 @@
                     </li>
                 
 
+                
+                    <li>
+                        <a target="_blank"  href="https://www.linkedin.com/in/chun-jaekwan-183040125">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
                 
 
                 </ul>

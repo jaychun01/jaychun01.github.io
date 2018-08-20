@@ -80,7 +80,7 @@
                         
 							
                         <li>
-                            <a href="/Tags/">Tags</a>
+                            <a href="/archives/">archives</a>
                         </li>
 							
 						
@@ -88,7 +88,7 @@
                         
 							
                         <li>
-                            <a href="/archives/">archives</a>
+                            <a href="/Tags/">Tags</a>
                         </li>
 							
 						
@@ -231,7 +231,10 @@
 <p>opending mode: w=쓰기, r=읽기, a=append, t=text, b=binary</p>
 <p><code>f.write(&quot;string&quot;) or f.writelines()</code> : 쓰기</p>
 <p><code>f.read([n]), f.readline([n]) or f.readlines()</code> : 읽기 (문자, 한줄, 여러 줄)</p>
-<p><code>f.flush(), f.tell()</code></p>
+<p><code>f.flush(), f.tell()</code><br><br></p>
+<ul>
+<li>Pandas (<a href="http://nittaku.tistory.com/" target="_blank" rel="noopener">참고</a>)<br><code>dt=pd.DataFrame(Series)</code> : 데이터프레임 선언<br><code>dt.shape(), dt.columns</code> : 데이터 프레임 행과 열 확인<br><code>dt.unique()</code> : 데이터가 범주형인지 확인<br><code>dt.dropna(how=&#39;any&#39;)</code> : 결측값 제거<br><br><br><code>pandas.merge(df1, df2, on=&quot;key&quot;)</code> : key 열을 기준으로 df1, df2에 공통적인 값이 있는 열으로만 데이터프레임 구성<br><code>pandas.merge(df1, df2, on=&quot;key&quot;, how=&quot;outer&quot;)</code> : 위와 같이 합쳐주지만 공통적인 값이 key열에 없어도 추가하여 nan값을 가짐<br><code>pandas.merge(df1, df2, on=&quot;key&quot;, how=&quot;left&quot;)</code>: df1의 key열을 기준으로 합침 <->how=”right”<br><code>pandas.merge(df1, df2, left_on=&quot;rkey&quot;, right_on=&quot;lkey&quot;)</code> : 기준되는 열의 이름이 다른 경우<br><br><br><code>pandas.merge(df1, df2, left_on=&quot;key&quot;, rigth_index=True)</code> : 왼쪽 dt의 열을 기준으로 오른쪽 dt의 인덱스값을 삽입하여 데이터프레임 구성(오른쪽 dt의 인덱스가 왼쪽 dt의 기준열의 도메인에 속해있어야 함)<br><code>pandas.merge(df1, df2, left_index=True, rigth_index=True)</code> : 공통된 인덱스를 기준으로 데이터프레임 구성(how=”” 옵션 가능)<br><br><br><code>pd.concat(s1,s2,s3)</code> : 시리즈를 단순 연결하여 하나의 시리즈로 연결 (s1,s2,s3는 시리즈형 데이터)<br><code>pd.concat([s1,s2,s3], axis=1, keys=[&quot;a&quot;,&quot;b&quot;,&quot;c&quot;])</code> : 시리즈를 열 방향으로 연결하여 데이터 프레임 구성, keys는 열이름에 해당(해당 인덱스가 없는 경우 nan값을 가짐)<br><code>pd.concat([dt1,dt2,dt3], axis=1, keys=[&quot;a&quot;,&quot;b&quot;,&quot;c&quot;])</code> : 데이터프레임의 연결도 시리즈와 동일<br><code>pd.concat([s1,s2,s3], ignore_index=True)</code> : 인덱스를 처음부터 새로 붙여서 데이터프레임 구성</-></li>
+</ul>
 
                 <hr>
                 
